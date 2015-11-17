@@ -82,10 +82,10 @@
 					</div>
 
 					<div class="directions">
-						<div class="top_button"></div>
-						<div class="left_button"></div>
-						<div class="right_button"></div>
-						<div class="bottom_button"></div>
+						<div class="btn top_button"></div>
+						<div class="btn left_button"></div>
+						<div class="btn right_button"></div>
+						<div class="btn bottom_button"></div>
 						<div class="center_button">
 							<div class="circle"></div>
 						</div>
@@ -169,17 +169,48 @@
 		</svg>
 	</div>
 </div>
-<div class="abrir">Abrir</div>
 
 <script type="text/javascript">
 	var pokemons;
-	var pokemon_html = "<div class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
+	var pokemon_html = "<div id=\"{id}\" class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
 	var url = 'http://pokeapi.co//api/v1/pokedex/1/';
+
+
+	elements = document.getElementsByClassName("btn");
+	for(e in elements){
+		elements[e].onmousedown = function(){
+			this.classList.add("clicked");
+		}
+
+		elements[e].onmouseup = function(){
+			this.classList.remove("clicked")
+		}
+		elements[e].onmouseout = function(){
+			this.classList.remove("clicked")
+		}
+	}
+
+
+	function adicionaClick(){
+		elementos = document.getElementsByClassName("pokemon");
+		for(e in elementos){
+			elementos[e].onclick = function(){
+				console.log("clicou");
+				if(document.getElementsByClassName("selected").length > 0)
+					document.getElementsByClassName("selected")[0].classList.remove("selected");
+
+				this.classList.add("selected");
+			}
+		}
+	}
+
 
 	function httpGetAsync(url) {
 		// verifica se já possui os pokemons armazenados no localStorage
 		if(localStorage['pokemons']){
-			insere_pokemons(JSON.parse(localStorage['pokemons']));
+			pokemons = JSON.parse(localStorage['pokemons'])
+			insere_pokemons(pokemons);
+			console.log("pegou do localStorage");
 			return;
 		}
 
@@ -198,15 +229,25 @@
 	httpGetAsync(url);
 
 	function insere_pokemons(dicionario){
+		dicionario.pokemon.sort(function(a, b) {
+		    return parseInt(a.resource_uri.split("/")[3]) - parseInt(b.resource_uri.split("/")[3]);
+		});
 		// preenche a div list_pokemon com elementos 'pokemon'
 		for(p in dicionario.pokemon){
 			aux = pokemon_html;
-			aux = aux.replace("{id}", dicionario.pokemon[p].resource_uri.split('/')[3]);
-			re = new RegExp("-", 'g');
+			re = new RegExp("{id}", 'g');
+			id = dicionario.pokemon[p].resource_uri.split('/')[3];
+			//aux = aux.replace(re, ("00" + id).slice((id.length <=3 ? -3 : -5)));
+			//if(id.length <= 3)
+				aux = aux.replace(re, (id.length<=3 ? ("00" + id).slice(-3) : "- - -" ));
 
-			aux = aux.replace("{nome}", dicionario.pokemon[p].name.replace(re, " "));
+			/*re = new RegExp("-", 'g');*/
+
+			aux = aux.replace("{nome}", dicionario.pokemon[p].name.replace("-", " "));
 
 			document.getElementsByClassName('list_pokemon')[0].innerHTML += aux;
+
+			adicionaClick();
 		}
 	}
 </script>
