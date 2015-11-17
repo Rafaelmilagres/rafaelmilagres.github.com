@@ -56,11 +56,10 @@
 					<div class="screen_border_out">
 						<div class="screen_border">
 							<div class="screen brilho">
-								<!-- <div class="shadow"></div> -->
-								<span class="name">Bulbasaur</span>
-								<div class="types">
-									<span class="type plant">Plant</span>
-									<span class="type monster">Monster</span>
+								<div class="shadow"></div>
+								<div class="top">
+									<span class="name">Pokemon</span>
+									<div class="types"></div>
 								</div>
 								<div class="screens">
 									<div class="screen1">
@@ -68,10 +67,10 @@
 											<img src="imgs/pokebola.png">
 										</div>
 										<div class="infos">
-											<span class="hp">HP: 40</span>
-											<span class="attack">Attack: 20</span>
-											<span class="defense">Defense: 15</span>
-											<span class="speed">Speed: 20</span>
+											<span class="hp">HP: </span>
+											<span class="attack">Attack: </span>
+											<span class="defense">Defense: </span>
+											<span class="speed">Speed: </span>
 										</div>
 									</div>
 									<div class="screen2">
@@ -97,7 +96,6 @@
 							<div class="top cleafix">
 								<div class="circle1"></div>
 								<div class="circle2"></div>
-								<div class="circle3"></div>
 							</div>
 						</div>
 					</div>
@@ -210,13 +208,15 @@
 <script type="text/javascript">
 	var pokemons;
 	var pokemon_html = "<div id=\"{id}\" class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
+	var type_html = '<span class="type {type}">{type}</span>';
 	var url = 'http://pokeapi.co//api/v1/pokedex/1/';
+	var url_sprite = 'http://assets5.pokemon.com/assets/cms2/img/pokedex/detail/{id}.png';
 	var infos;
-	var descricao;
+	var description;
 	var sprite;
 
 
-	// ao clicar no botão right_button, altera a página de vizualização do pokemon na tela
+	// ao clicar no botão right_button e left_button, altera a página de vizualização do pokemon na tela
 	document.getElementsByClassName('right_button')[0].onclick = function(){
 		document.getElementsByClassName('screens')[0].style.margin = "0 0 0 -100%";
 	};
@@ -226,17 +226,30 @@
 	};
 
 
-	// ESSE CODIGO DEVE IR NA FUNÇÃO DE BUSCA DO POKEMON
+	// ao clicar no botão top_button e bottom_button, altera o pokemon vizualizado
+	document.getElementsByClassName('top_button')[0].onclick = function(){
+		id_str = document.getElementsByClassName('selected')[0].id;
+		id = parseInt(id_str) - 1;
+		id_str = ('000' + id).slice(-3);
+		
+		if(id > 0){
+			resetaScreen();
+			consultaPokemon(id_str);
+			document.getElementById(id_str).classList.add('selected');
+		}
+	};	
 
-	var img = new Image();
-	img.src = "http://assets2.pokemon.com/assets/cms2/img/pokedex/detail/001.png";
-	img.id = "img";
-	img.addEventListener("load", function(){
-		document.getElementsByTagName('img')[0].classList.add('hidden');
-		document.getElementsByClassName('img')[0].appendChild(img);
-		console.log("carregou");
-	}, false);
-
+	document.getElementsByClassName('bottom_button')[0].onclick = function(){
+		id_str = document.getElementsByClassName('selected')[0].id;
+		id = parseInt(id_str) + 1;
+		id_str = ('000' + id).slice(-3);
+		
+		if(id > 0){
+			resetaScreen();
+			consultaPokemon(id_str);
+			document.getElementById(id_str).classList.add('selected');
+		}
+	};	
 
 
 	// ao iniciar a página, da o efeito de tela ligando e exibe os dados do pokemon de codigo 001
@@ -277,14 +290,36 @@
 	}
 
 
+	function resetaScreen(){
+		// apaga a imgem do pokemon anterior
+		img = document.getElementById('img');
+		document.getElementsByClassName('img')[0].removeChild(img);
+
+		// reseta as informações anteriores
+		document.getElementsByClassName('name')[0].innerHTML = "Pokémon";
+		document.getElementsByClassName('hp')[0].innerHTML = "HP: ";
+		document.getElementsByClassName('attack')[0].innerHTML = "Attack: ";
+		document.getElementsByClassName('defense')[0].innerHTML = "Defense: ";
+		document.getElementsByClassName('speed')[0].innerHTML = "Speed: ";
+		document.getElementsByClassName('types')[0].innerHTML = "";
+		document.getElementsByClassName('description')[0].innerHTML = "Descrition: <span></span>";
+
+
+		if(document.getElementsByClassName("selected").length > 0)
+			document.getElementsByClassName("selected")[0].classList.remove("selected");
+	}
+
 	// adiciona o efeito clicavel no pokemon da lista
 	function adicionaClick(){
 		elementos = document.getElementsByClassName("pokemon");
 		for(e in elementos){
 			elementos[e].onclick = function(){
-				console.log("clicou");
-				if(document.getElementsByClassName("selected").length > 0)
-					document.getElementsByClassName("selected")[0].classList.remove("selected");
+				resetaScreen();
+
+				// chama a função de busca do pokemon
+				consultaPokemon(this.id);
+				document.getElementsByTagName('img')[0].classList.remove('hidden');
+
 
 				this.classList.add("selected");
 			}
@@ -316,7 +351,7 @@
 
 
 	/* obtem um unico pokemon */
-	function consultaPokemon(id) {
+	function consultaPokemon(identifier) {
 		// adiciona o pokemon no localStorage?
 		/*if(localStorage['pokemons']){
 			pokemons = JSON.parse(localStorage['pokemons'])
@@ -328,30 +363,62 @@
 		xmlHttp.onreadystatechange = function() {
 			if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
 				infos = JSON.parse(xmlHttp.responseText);
-				document.getElementsByClassName('screen')[0].innerHTML = infos;
 
-				obtemSprite(id);
+				// insere as informações obtidas
+				var img = new Image();
+				if(identifier.length<=3)
+					img.src = url_sprite.replace("{id}", identifier);
+				else{
+					img.src = 'imgs/unknown.png';
+					img.className = "circle_img";
+				}
+				img.id = "img";
+				img.addEventListener("load", function(){
+					document.getElementsByTagName('img')[0].classList.add('hidden');
+					document.getElementsByClassName('img')[0].appendChild(img);
+				}, false);
+
+				// veriica se o pokemon é Macho ou Fêmea para insirir o icone respectivo
+				infos.name = infos.name.replace('-', ' ');
+				infos.name = infos.name.replace('Nidoran m', 'Nidoran <i class=\"fa fa-mars\"></i></span>');
+				infos.name = infos.name.replace('Nidoran f', 'Nidoran <i class=\"fa fa-venus\"></i></span>');
+				document.getElementsByClassName('name')[0].innerHTML = infos.name;
+				document.getElementsByClassName('hp')[0].innerHTML = "HP: " + infos.hp;
+				document.getElementsByClassName('attack')[0].innerHTML = "Attack: " + infos.attack;
+				document.getElementsByClassName('defense')[0].innerHTML = "Defense: " + infos.defense;
+				document.getElementsByClassName('speed')[0].innerHTML = "Speed: " + infos.speed;
+
+				// types
+				for(t in infos.types){
+					re = new RegExp("{type}", 'g');
+					document.getElementsByClassName('types')[0].innerHTML += type_html.replace(re, infos.types[t].name);
+				}
+
+				// atualiza a descricao
+				if(infos.descriptions.length)
+					obtemDescricao(infos.descriptions[0].resource_uri);
 			}
 		}
-		xmlHttp.open( "GET", 'http://pokeapi.co/api/v1/pokemon/' + id, true );
+		xmlHttp.open( "GET", 'http://pokeapi.co/api/v1/pokemon/' + identifier, true );
 		xmlHttp.send( null );
 	}
 
 
-	// obtem a sprite do pokemon
-	function obtemSprite(id) {
-		var xmlHttp = new XMLHttpRequest();
+	function obtemDescricao(url){
+	var xmlHttp = new XMLHttpRequest();
 		xmlHttp.onreadystatechange = function() {
 			if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-				sprite = JSON.parse(xmlHttp.responseText).image;
+				description = JSON.parse(xmlHttp.responseText);
+				document.getElementsByClassName('description')[0].innerHTML = "Description:											<span>" + description.description + "</span>";
 			}
 		}
-		xmlHttp.open( "GET", 'http://pokeapi.co/api/v1/sprite/' + id, true );
+
+		xmlHttp.open( "GET", 'http://pokeapi.co/' + url, true );
 		xmlHttp.send( null );
 	}
 
 
-
+	// insere todos os pokemons na listagem, por ordem de ID
 	function insere_pokemons(dicionario){
 		dicionario.pokemon.sort(function(a, b) {
 		    return parseInt(a.resource_uri.split("/")[3]) - parseInt(b.resource_uri.split("/")[3]);
@@ -361,17 +428,21 @@
 		// preenche a div list_pokemon com elementos 'pokemon'
 		for(p in dicionario.pokemon){
 			aux = pokemon_html;
+
+			// replace do id
 			re = new RegExp("{id}", 'g');
 			id = dicionario.pokemon[p].resource_uri.split('/')[3];
-			aux = aux.replace(re, (id.length<=3 ? ("00" + id).slice(-3) : "- - -" ));
+			aux = aux.replace('{id}', (id.length<=3 ? ("00" + id).slice(-3) : ("00" + id).slice(-5)));
+			aux = aux.replace('{id}', (id.length<=3 ? ("00" + id).slice(-3) : "- - -" ));
 
+			//replace do nome
 			aux = aux.replace("{nome}", dicionario.pokemon[p].name.replace("-", " "));
 
+			// veriica se o pokemon é Macho ou Fêmea para insirir o icone respectivo
 			aux = aux.replace(' m</span>', ' <i class=\"fa fa-mars\"></i></span>');
 			aux = aux.replace(' f</span>', ' <i class=\"fa fa-venus\"></i></span>');
 
 			string += aux;
-
 		}
 
 		// insere os pokemons na lista
