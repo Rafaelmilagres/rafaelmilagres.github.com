@@ -15,11 +15,21 @@
 	font-family: helvetica;
 }
 
+.bg{
+	/*background: url('../imgs/bg.png');*/
+	background-size: cover;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
 
 .pokedex{
 	margin: auto;
 	width: 1000px;
 	position: absolute;
+	left: 13%;
 	top: 50%;
 	transform: translateY(-50%);
 
@@ -418,9 +428,10 @@
 							box-shadow: 0 0 2px #000;
 
 							&.clicked{
-								left: 34px !important;
+								/*left: 34px !important;
 								top: 0px;
-								transform: rotateX(10deg);
+								transform: rotateX(10deg);*/
+								background: darken(#056565, 3%);
 							}
 						}
 
@@ -432,9 +443,9 @@
 							border-bottom-left-radius: 5px;	
 
 							&.clicked{
-								left: 0px !important;
+								/*left: 0px !important;
 								top: 33px;
-								transform: rotateY(-10deg);
+								transform: rotateY(-10deg);*/
 							}
 						}
 
@@ -470,9 +481,9 @@
 							border-bottom-left-radius: 5px;
 
 							&.clicked{
-								left: 35px !important;
+								/*left: 35px !important;
 								top: 69px;
-								transform: rotateX(-5deg);
+								transform: rotateX(-5deg);*/
 							}
 						}
 
@@ -484,9 +495,9 @@
 							border-bottom-right-radius: 5px;
 
 							&.clicked{
-								transform: rotateY(5deg);
+								/*transform: rotateY(5deg);
 								top: 34px !important;
-								left: 69px !important;
+								left: 69px !important;*/
 							}
 						}
 					}
