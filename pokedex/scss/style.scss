@@ -144,6 +144,20 @@
 								background: #fb0505;
 								border-radius: 50%;
 								border: 1px solid #000;
+								text-align: center;
+
+								&.selected{
+									border: 2px solid #333;
+								}
+
+
+								& i{
+									margin-top: 5px;
+									font-size: 24px;
+									color: #fb0505;
+									/*text-shadow: -2px 2px #333;*/
+									text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333;
+								}
 							}
 
 							& .top{
@@ -179,11 +193,14 @@
 								border-radius: 20px;
 								text-align: center;
 								overflow: hidden;
+								position: relative;
 
 								& .top{
 									width: 100%;
 									height: 50px;
 									padding: 0;
+									margin: 0;
+									transition: all 0.3s ease-in-out;
 
 									& .name{
 										width: 100%;
@@ -279,6 +296,23 @@
 									}
 								}
 
+								& .screen_help{
+									width: 320px;
+									position: absolute;
+									left: -320px;
+									transition: all 0.3s ease-in-out;
+									padding: 10px;
+
+									& h3{
+										font-size: 22px;
+										font-weight: 600;
+									}
+
+									& p{
+										text-align: left !important;
+										margin: 10px 0;
+									}
+								}
 
 								& .screens{
 									width: 200%;
@@ -510,6 +544,10 @@
 		}
 	}
 
+	& .back-right-block{
+		/*transform: rotateY(180deg);*/
+	}
+
 	& .back-right{
 		width: 460px;
 		background: #fb0505;
@@ -666,5 +704,52 @@
 	}
 	100%{
 		box-shadow: 0 0 5px #fff
+	}
+}
+
+
+.voice-animated{
+	animation: pisca 0.5s infinite;
+}
+
+@-webkit-keyframes pisca{
+	0%{
+		background: lighten(#30fa04, 25%);
+	}
+	15%{
+		background: #06fbfe;
+	}
+	60%{
+		background: lighten(#30fa04, 25%);
+	}
+	80%{
+		background: #06fbfe;
+	}
+	90%{
+		background: lighten(#30fa04, 25%);
+	}
+	100%{
+		background: #06fbfe;
+	}
+}
+
+@keyframes pisca{
+	0%{
+		background: lighten(#30fa04, 25%);
+	}
+	20%{
+		background: #06fbfe;
+	}
+	40%{
+		background: lighten(#30fa04, 25%);
+	}
+	70%{
+		background: #06fbfe;
+	}
+	90%{
+		background: lighten(#30fa04, 25%);
+	}
+	100%{
+		background: #06fbfe;
 	}
 }
