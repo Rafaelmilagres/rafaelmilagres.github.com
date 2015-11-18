@@ -68,6 +68,7 @@
 								<div class="shadow"></div>
 								<div class="top">
 									<span class="name">Pokemon</span>
+									<span class="muted"></span>
 									<div class="types"></div>
 								</div>
 								<div class="screens">
@@ -220,11 +221,12 @@
 </div>
 
 <script type="text/javascript">
-// toca a abertura de pokemon
+	play = true;
 
-		op = new Audio('sounds/op1.mp3');
-		op.loop = true;
-		op.play();
+	// toca a abertura de pokemon
+	op = new Audio('sounds/op1.mp3');
+	op.loop = true;
+	op.play();
 
 
 	var pokemons;
@@ -251,6 +253,13 @@
 		document.querySelector('.top .circle1').classList.add('selected');
 		document.querySelector('.top .circle2').classList.remove('selected');
 	};
+
+	// função para
+	document.getElementsByClassName('sound')[0].onclick = function(){
+		play = !play;
+		op.muted = !play;
+	  	window.speechSynthesis.cancel();
+	}
 
 
 	// ao clicar no botão top_button e bottom_button, altera o pokemon vizualizado
@@ -501,24 +510,6 @@
 				description = JSON.parse(xmlHttp.responseText);
 				document.getElementsByClassName('description')[0].innerHTML = "Description:	<span>" + description.description + "</span>";
 
-				/*utterance = new SpeechSynthesisUtterance();
-
-			  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ( infos.types[1] ? " and " + infos.types[1].name : "" )+ ' type. ' + description.description;
-			  	utterance.voice = 'Google US English';
-			  	utterance.lang = 'en-US';
-			  	utterance.rate = 1;
-			  	utterance.pitch = 0.3;
-				utterance.onend = function(){
-					document.getElementsByClassName('blue_circle')[0].classList.remove('voice-animated');
-				};
-				utterance.onstart = function(){
-					document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
-				};
-				audio = new Audio('sounds/ding.mp3');
-				audio.play();
-				setTimeout(function(){
-				  	window.speechSynthesis.speak(utterance);
-				}, 500);*/
 				falar(description.description);
 
 			}
@@ -530,25 +521,27 @@
 
 
 	function falar(description){
-  		window.speechSynthesis.cancel();
-		utterance = new SpeechSynthesisUtterance();
+		if(play == true){
+	  		window.speechSynthesis.cancel();
+			utterance = new SpeechSynthesisUtterance();
 
-	  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', a' + (['a','e','i','o','u'].indexOf(infos.types[0].name[0]) != -1 ? 'n ' : ' ') + infos.types[0].name + ( infos.types[1] ? " and a" + (['a','e','i','o','u'].indexOf(infos.types[1].name[0]) != -1 ? 'n ' : ' ') + infos.types[1].name : "" )+ ' pokemon. ' + description;
-	  	utterance.voice = 'Google US English';
-	  	utterance.lang = 'en-US';
-	  	utterance.rate = 1;
-	  	utterance.pitch = 0.3;
-		utterance.onend = function(){
-			document.getElementsByClassName('blue_circle')[0].classList.remove('voice-animated');
-		};
-		utterance.onstart = function(){
-			document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
-		};
-		audio = new Audio('sounds/ding.mp3');
-		audio.play();
-		setTimeout(function(){
-		  	window.speechSynthesis.speak(utterance);
-		}, 500);
+		  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', a' + (['a','e','i','o','u'].indexOf(infos.types[0].name[0]) != -1 ? 'n ' : ' ') + infos.types[0].name + ( infos.types[1] ? " and a" + (['a','e','i','o','u'].indexOf(infos.types[1].name[0]) != -1 ? 'n ' : ' ') + infos.types[1].name : "" )+ ' pokemon. ' + description;
+		  	utterance.voice = 'Google US English';
+		  	utterance.lang = 'en-US';
+		  	utterance.rate = 1;
+		  	utterance.pitch = 0.3;
+			utterance.onend = function(){
+				document.getElementsByClassName('blue_circle')[0].classList.remove('voice-animated');
+			};
+			utterance.onstart = function(){
+				document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
+			};
+			audio = new Audio('sounds/ding.mp3');
+			audio.play();
+			setTimeout(function(){
+			  	window.speechSynthesis.speak(utterance);
+			}, 500);
+		}
 	}
 
 
