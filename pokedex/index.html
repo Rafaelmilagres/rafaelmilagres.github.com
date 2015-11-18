@@ -466,11 +466,14 @@
 				utterance.onend = function(){
 					document.getElementsByClassName('blue_circle')[0].classList.remove('voice-animated');
 				};
-
-			  	window.speechSynthesis.speak(utterance);
-			  	setTimeout(function(){
-			  		document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
-			  	}, 500);
+				utterance.onstart = function(){
+					document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
+				};
+				audio = new Audio('sounds/ding.mp3');
+				audio.play();
+				setTimeout(function(){
+				  	window.speechSynthesis.speak(utterance);
+				}, 150);
 
 			}
 		}
