@@ -399,7 +399,7 @@
 						width: 250px;
 						float: left;
 						font-size: 48px;
-						padding: 15px 0;
+						padding: 13px 0;
 						text-align: center;
 						cursor: default;
 
@@ -442,8 +442,8 @@
 
 						& .left_button{
 							@extend .top_button;
-							top: 35px;
-							left: 0;
+							top: 34px;
+							left: 1px;
 							border-top-right-radius: 0;
 							border-bottom-left-radius: 5px;	
 
@@ -457,7 +457,9 @@
 						& .center_button{
 							@extend .top_button;
 							top: 35px;
-							left: 35px;
+							left: 36px;
+							width: 33px;
+							height: 33px;
 							border-top-right-radius: 0;
 							border-top-left-radius: 0;
 							border: none;
@@ -475,14 +477,14 @@
 								margin: 0 auto;
 								position: absolute;
 								top: 50%;
-								left: 30%;
-								transform: translateY(-50%);
+								left: 50%;
+								transform: translate(-50%, -50%);
 							}
 						}
 
 						& .bottom_button{
 							@extend .top_button;
-							top: 70px;
+							top: 68px;
 							left: 35px;
 							border-top-right-radius: 0;
 							border-top-left-radius: 0;
@@ -498,8 +500,8 @@
 
 						& .right_button{
 							@extend .top_button;
-							top: 35px;
-							left: 70px;
+							top: 34px;
+							left: 69px;
 							border-top-left-radius: 0;
 							border-bottom-right-radius: 5px;
 
