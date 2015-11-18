@@ -591,21 +591,35 @@
 	}
 
 	& .back-right-block{
-		/*transform: rotateY(180deg);*/
+		transform: rotateY(180deg);
+		flow-from: book-text-flow;
+		-webkit-flow-from: book-text-flow;
+		transition: all 1s ease-in-out;
+	}
+
+	& .back-right-back{
+		width: 363px;
+		height: 407px;
+		background: #fb0505;
+		position: absolute;
+		top: 180px;
+		right: 63px;
 	}
 
 	& .back-right{
-		width: 460px;
+
+		width: 440px;
 		background: #fb0505;
-		height: 470px;
+		height: 489px;
 		float: left;
-		margin-left: 1px;
-		margin-top: 155px;
+		margin-left: 9px;
+		margin-top: 137px;
 		border-bottom-right-radius: 30px;
 		border: 2px solid #000;
 		border-left: none;
 		border-top: none;
 		position: relative;
+		transition: margin 0.7s ease-in-out;
 
 		& svg{
 			position: absolute;
@@ -619,7 +633,7 @@
 
 		.list_pokemon_block{
 			overflow: hidden;
-			margin: 70px 0 30px 60px;
+			margin: 70px 0 30px 40px;
 			width: 335px;
 			height: 350px;
 			position: relative;
@@ -834,4 +848,25 @@
 	60%{
 		transform: rotateZ(0);	
 	}
+}
+
+
+button{
+	z-index: 100;
+	position: absolute;
+}
+
+.translateNormal{
+	transform: translateY(0) !important;
+	& .back-right{
+		margin-left: 1px !important;
+	}
+}
+
+.zindex{
+	z-index: 35;
+}
+
+.hide{
+	display: none;
 }

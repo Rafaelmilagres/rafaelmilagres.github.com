@@ -145,6 +145,7 @@
 		</div>
 	</div>
 	<div class="back-right-block">
+		<div class="back-right-back zindex"></div>
 		<div class="back-right">
 			<div class="list_pokemon_block">
 				<div class="list_pokemon">
@@ -162,30 +163,30 @@
 			  	<rect fill="#fb0505" stroke-width="0" stroke-opacity="null" x="225.5" y="76" width="77.14823" height="30" id="svg_7" stroke="black"/>
 			  	<rect fill="#fb0505" stroke-width="0" stroke-opacity="null" x="265.5" y="46" width="77.14823" height="30" id="svg_7" stroke="black"/>
 
-				<path d="M20 121 C 78 123, 240 120, 279 59" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
-				<path d="M277 60 C 300 42, 320 35, 445 31" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
+				<path class="getHide hide" d="M20 121 C 78 123, 240 120, 279 59" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
+				<path class="getHide hide" d="M277 60 C 300 42, 320 35, 445 31" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
 				<path id="svg_1" fill="transparent" stroke="#fb0505" stroke-width="16px" d="m1,109c0,0 229,10 266,-60"/>
 			  	<path id="svg_2" fill="transparent" stroke="#fb0505" stroke-width="16px" d="m265,55c15,-25 55,-37 213,-38"/>
 			  	<path id="svg_3" fill="transparent" stroke="black" stroke-width="2px" d="m0,100c0,0 230,10 260,-55"/>
 			  	<path id="svg_4" fill="transparent" stroke="black" stroke-width="2px" d="m260,44.53489c30,-25 60,-37 240,-37"/>
-			  	<path id="svg_5" fill="transparent" stroke="black" stroke-width="2px" d="m15,115c0,0 215,10 260,-60"/>
-			  	<path id="svg_6" fill="transparent" stroke="black" stroke-width="2px" d="m275,55c10,-15 50,-27 170,-30"/>
+			  	<path id="svg_5" class="getHide hide" fill="transparent" stroke="black" stroke-width="2px" d="m15,115c0,0 215,10 260,-60"/>
+			  	<path id="svg_6" class="getHide hide" fill="transparent" stroke="black" stroke-width="2px" d="m275,55c10,-15 50,-27 170,-30"/>
 			  	<ellipse rx="0.5" id="svg_9" cy="22" cx="22" stroke-width="1.5" stroke="#000" fill="#fff"/>
 			  	
 			  	
 
 
 
-				<path d="M20 116 C 20 550, 20 550, 21 554" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
-			  	<g stroke="#b61b17">
+				<path class="getHide hide" d="M20 116 C 20 550, 20 550, 21 554" stroke-width="10px" stroke="#b61b17" fill="transparent"/>
+			  	<g class="getHide hide" stroke="#b61b17">
 					<line x1="22" y1="550" x2="20" y2="557" stroke-width="8" />
 			  	</g>
-				<path d="M15 540 C 15 550, 15 560, 30 560" stroke-width="2px" stroke="black" fill="transparent"/>
-				<path id="svg_4" fill="transparent" stroke="black" stroke-width="2px" d="m279,66c30,-25 60,-25 165,-30"/>
-			  	<path fill="transparent" stroke="black" stroke-width="2px" d="m25,125c0,0 195,10 255,-60"/>
+				<path class="getHide hide" d="M15 540 C 15 550, 15 560, 30 560" stroke-width="2px" stroke="black" fill="transparent"/>
+				<path class="getHide hide" id="svg_4" fill="transparent" stroke="black" stroke-width="2px" d="m279,66c30,-25 60,-25 165,-30"/>
+			  	<path class="getHide hide" fill="transparent" stroke="black" stroke-width="2px" d="m25,125c0,0 195,10 255,-60"/>
 
 
-			  	<g stroke="black" >
+			  	<g class="getHide hide" stroke="black" >
 							<line x1="100" y1="125" x2="110" y2="112" stroke-width="2" />
 							<line x1="108" y1="124" x2="118" y2="112" stroke-width="2" />
 							<line x1="116" y1="124" x2="126" y2="111" stroke-width="2" />
@@ -203,7 +204,7 @@
 							<line x1="15" y1="115" x2="25" y2="125" stroke-width="2" />
 						</g>
 
-			  	<g stroke="black">
+			  	<g class="getHide hide" stroke="black">
 					<line x1="15" y1="115" x2="15" y2="540" stroke-width="2" />
 					<line x1="30" y1="560" x2="445" y2="560" stroke-width="2" />
 					<line x1="445" y1="25" x2="445" y2="560" stroke-width="2" />
@@ -214,6 +215,8 @@
 		</div>
 	</div>
 </div>
+
+<button id="vai">vai</button>
 
 <script type="text/javascript">
 	var pokemons;
@@ -573,6 +576,22 @@
 		// encerra o loop do loading
 		clearInterval(interval);
 	}
+
+
+	
+document.getElementById('vai').onclick = function(){
+	document.getElementsByClassName('back-right-block')[0].classList.toggle("translateNormal");
+	setTimeout(function(){
+		document.getElementsByClassName('back-right-back')[0].classList.toggle('zindex');
+		lista = document.querySelectorAll('.getHide');
+		console.log(lista);
+		for(l=0; l < lista.length; l++){
+			console.log(lista[l]);
+			lista[l].classList.toggle('hide');
+		}
+	}, 500);
+}
+
 </script>
 </body>
 </html>
