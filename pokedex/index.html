@@ -101,6 +101,9 @@
 							<div class="help">
 								<i class="fa fa-question"></i>
 							</div>
+							<div class="sound">
+								<i class="fa fa-sound"></i>
+							</div>
 
 							<div class="top cleafix">
 								<div class="circle1 selected"></div>
@@ -576,7 +579,7 @@
 
 	
 function abrir(e){
-	op.volume = 0.25;
+	op.volume = 0.2;
 	e.stopPropagation();
 	window.speechSynthesis.cancel();
 	document.getElementsByClassName('back-right-block')[0].classList.toggle("translateNormal");
