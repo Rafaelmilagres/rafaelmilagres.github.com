@@ -173,6 +173,12 @@
 
 							& .sound{
 								@extend .help;
+								margin: 15px 0px;
+
+								& i{
+									margin-top: 7px;
+									font-size: 20px;
+								}
 							}
 
 							& .top{

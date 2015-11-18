@@ -101,9 +101,9 @@
 							<div class="help">
 								<i class="fa fa-question"></i>
 							</div>
-							<!-- <div class="sound">
-								<i class="fa fa-sound"></i>
-							</div> -->
+							<div class="sound">
+								<i class="fa fa-music"></i>
+							</div>
 
 							<div class="top cleafix">
 								<div class="circle1 selected"></div>
@@ -363,6 +363,18 @@
 		this.classList.remove("selected")
 	}
 
+
+	// efeito de pressionado para o botão de musica
+	document.getElementsByClassName('sound')[0].onmousedown = function(){
+		this.classList.add("selected");
+	}
+	document.getElementsByClassName('sound')[0].onmouseup = function(){
+		this.classList.remove("selected")
+	}
+	document.getElementsByClassName('sound')[0].onmouseout = function(){
+		this.classList.remove("selected")
+	}
+
 	function resetaScreen(){
 		// apaga a imgem do pokemon anterior
 		img = document.getElementById('img');
@@ -386,7 +398,8 @@
 	function adicionaClick(){
 		elementos = document.getElementsByClassName("pokemon");
 		for(e in elementos){
-			elementos[e].onclick = function(){
+			elementos[e].onclick = function(e){
+				e.stopPropagation();
 				resetaScreen();
 
 				// chama a função de busca do pokemon

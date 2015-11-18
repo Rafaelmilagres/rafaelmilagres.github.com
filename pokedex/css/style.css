@@ -2151,6 +2151,11 @@
                   color: #fb0505;
                   /*text-shadow: -2px 2px #333;*/
                   text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333; }
+              .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .sound {
+                margin: 15px 0px; }
+                .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .sound i {
+                  margin-top: 7px;
+                  font-size: 20px; }
               .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .top {
                 padding: 10px;
                 text-align: center;
