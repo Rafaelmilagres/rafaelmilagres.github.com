@@ -2328,6 +2328,8 @@
               border-top-right-radius: 5px;
               border: 1px solid #000;
               box-shadow: 0 0 2px #000; }
+              .pokedex .border-back-left .back-left .content-left .bottom_block .directions .top_button:hover, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .left_button:hover, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .center_button:hover, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .bottom_button:hover, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .right_button:hover {
+                cursor: pointer; }
               .pokedex .border-back-left .back-left .content-left .bottom_block .directions .top_button.clicked, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .clicked.left_button, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .clicked.center_button, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .clicked.bottom_button, .pokedex .border-back-left .back-left .content-left .bottom_block .directions .clicked.right_button {
                 /*left: 34px !important;
                 top: 0px;
@@ -2349,6 +2351,8 @@
               border-top-left-radius: 0;
               border: none;
               box-shadow: none; }
+              .pokedex .border-back-left .back-left .content-left .bottom_block .directions .center_button:hover {
+                cursor: default; }
               .pokedex .border-back-left .back-left .content-left .bottom_block .directions .center_button .circle {
                 border-radius: 50%;
                 width: 15px;
@@ -2357,7 +2361,7 @@
                 margin: 0 auto;
                 position: absolute;
                 top: 50%;
-                left: 25%;
+                left: 30%;
                 transform: translateY(-50%); }
             .pokedex .border-back-left .back-left .content-left .bottom_block .directions .bottom_button {
               top: 70px;
