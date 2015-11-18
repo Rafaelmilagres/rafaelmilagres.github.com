@@ -604,6 +604,7 @@
 		position: absolute;
 		top: 180px;
 		right: 63px;
+		cursor: pointer;
 	}
 
 	& .back-right{
@@ -621,8 +622,11 @@
 		position: relative;
 		transition: margin,border 0.7s ease-in-out;
 
+		cursor: pointer;
+
 		& svg{
 			position: absolute;
+			cursor: pointer;
 			top: -102px;
 			left: -1px;
 			width: 100.8%;

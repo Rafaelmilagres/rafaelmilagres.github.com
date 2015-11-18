@@ -2444,7 +2444,8 @@
     background: #fb0505;
     position: absolute;
     top: 180px;
-    right: 63px; }
+    right: 63px;
+    cursor: pointer; }
   .pokedex .back-right {
     width: 440px;
     background: #fb0505;
@@ -2457,9 +2458,11 @@
     border-left: none;
     border-top: none;
     position: relative;
-    transition: margin,border 0.7s ease-in-out; }
+    transition: margin,border 0.7s ease-in-out;
+    cursor: pointer; }
     .pokedex .back-right svg {
       position: absolute;
+      cursor: pointer;
       top: -102px;
       left: -1px;
       width: 100.8%;

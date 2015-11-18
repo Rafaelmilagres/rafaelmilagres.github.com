@@ -217,6 +217,13 @@
 </div>
 
 <script type="text/javascript">
+// toca a abertura de pokemon
+
+		op = new Audio('sounds/op1.mp3');
+		op.loop = true;
+		op.play();
+
+
 	var pokemons;
 	var pokemon_html = "<div id=\"{id}\" class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
 	var type_html = '<span class="type {type}">{type}</span>';
@@ -568,9 +575,10 @@
 
 
 	
-document.querySelector('.back-right svg').onclick = function(){
-
-  	window.speechSynthesis.cancel();
+function abrir(e){
+	op.volume = 0.25;
+	e.stopPropagation();
+	window.speechSynthesis.cancel();
 	document.getElementsByClassName('back-right-block')[0].classList.toggle("translateNormal");
 	setTimeout(function(){
 		document.getElementsByClassName('back-right-back')[0].classList.toggle('zindex');
@@ -590,6 +598,10 @@ document.querySelector('.back-right svg').onclick = function(){
 		consultaPokemon("001");
 	},3000);
 }
+
+document.querySelector('.back-right svg').onclick = abrir;
+document.querySelector('.back-right').onclick = abrir;
+document.querySelector('.back-right-back').onclick = abrir;
 
 </script>
 </body>
