@@ -585,10 +585,10 @@ function abrir(e){
 	document.getElementsByClassName('back-right-block')[0].classList.toggle("translateNormal");
 	setTimeout(function(){
 		document.getElementsByClassName('back-right-back')[0].classList.toggle('zindex');
-		lista = document.querySelectorAll('.getHide');
-		console.log(lista);
+		lista = document.querySelectorAll('.getHide');/*
+		console.log(lista);*/
 		for(l=0; l < lista.length; l++){
-			console.log(lista[l]);
+			/*console.log(lista[l]);*/
 			lista[l].classList.toggle('hide');
 		}
 	}, 500);
@@ -603,8 +603,8 @@ function abrir(e){
 }
 
 document.querySelector('.back-right svg').onclick = abrir;
-/*document.querySelector('.back-right').onclick = abrir;
-document.querySelector('.back-right-back').onclick = abrir;*/
+document.querySelector('.back-right').onclick = abrir;
+document.querySelector('.back-right-back').onclick = abrir;
 
 </script>
 </body>
