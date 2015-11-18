@@ -160,6 +160,10 @@
 									width: 12px;
 									height: 12px;
 									margin: 0 5px;
+
+									&.selected{
+										background: darken(#fb0505, 15%);
+									}
 								}
 
 								& .circle2{

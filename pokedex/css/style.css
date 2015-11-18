@@ -2144,6 +2144,8 @@
                   width: 12px;
                   height: 12px;
                   margin: 0 5px; }
+                  .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .top .circle1.selected, .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .top .top-left .three-circle .selected.circle3, .pokedex .border-back-left .back-left .top-left .three-circle .content-left .screen_block .screen_border_out .screen_border .top .selected.circle3, .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .top .selected.circle2 {
+                    background: #b10303; }
               .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .screen {
                 background: #fff;
                 height: 70%;

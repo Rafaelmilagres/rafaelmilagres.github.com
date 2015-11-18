@@ -76,9 +76,7 @@
 									<div class="screen2">
 										<div class="description">
 											Description:
-											<span>
-												A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.
-											</span>
+											<span></span>
 										</div>
 									</div>
 								</div>
@@ -94,7 +92,7 @@
 							<div class="poweroff"></div>
 
 							<div class="top cleafix">
-								<div class="circle1"></div>
+								<div class="circle1 selected"></div>
 								<div class="circle2"></div>
 							</div>
 						</div>
@@ -206,6 +204,16 @@
 </div>
 
 <script type="text/javascript">
+	/*var msg = new SpeechSynthesisUtterance();
+	var voices = window.speechSynthesis.getVoices();
+	msg.voice = 'Google UK English Male';
+	msg.text = 'Bulbasaur, one pokémon of grass. A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon.';
+	msg.lang = 'en-US';
+	window.speechSynthesis.speak(msg);*/
+
+
+
+
 	var pokemons;
 	var pokemon_html = "<div id=\"{id}\" class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
 	var type_html = '<span class="type {type}">{type}</span>';
@@ -219,10 +227,14 @@
 	// ao clicar no botão right_button e left_button, altera a página de vizualização do pokemon na tela
 	document.getElementsByClassName('right_button')[0].onclick = function(){
 		document.getElementsByClassName('screens')[0].style.margin = "0 0 0 -100%";
+		document.querySelector('.top .circle1').classList.remove('selected');
+		document.querySelector('.top .circle2').classList.add('selected');
 	};
 
 	document.getElementsByClassName('left_button')[0].onclick = function(){
 		document.getElementsByClassName('screens')[0].style.margin = "0 0 0 0";
+		document.querySelector('.top .circle1').classList.add('selected');
+		document.querySelector('.top .circle2').classList.remove('selected');
 	};
 
 
@@ -410,6 +422,15 @@
 			if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
 				description = JSON.parse(xmlHttp.responseText);
 				document.getElementsByClassName('description')[0].innerHTML = "Description:											<span>" + description.description + "</span>";
+
+				var utterance = new SpeechSynthesisUtterance();
+
+			  	utterance.text = infos.name + ', one pokémon of ' + infos.types[0].name + '. ' + description.description;
+			  	utterance.voice = 'Google US English';
+			  	utterance.lang = 'en-US';
+			  	utterance.rate = 1;
+			  	utterance.pitch = 0.4;
+			  	window.speechSynthesis.speak(utterance);
 			}
 		}
 
@@ -449,6 +470,7 @@
 		document.getElementsByClassName('list_pokemon')[0].innerHTML = string;
 		document.getElementsByClassName('pokemon')[0].classList.add('selected');
 		adicionaClick();
+		
 
 		// encerra o loop do loading
 		clearInterval(interval);
