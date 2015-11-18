@@ -97,7 +97,7 @@
 								<div class="line"></div>
 							</div>
 
-							<div class="poweroff">
+							<div class="help">
 								<i class="fa fa-question"></i>
 							</div>
 
@@ -244,8 +244,19 @@
 	// ao clicar no botão top_button e bottom_button, altera o pokemon vizualizado
 	document.getElementsByClassName('top_button')[0].onclick = function(){
 		id_str = document.querySelector('.pokemon.selected').id;
-		id = parseInt(id_str) - 1;
-		id_str = ('000' + id).slice(-3);
+		id = parseInt(id_str);
+
+		if(id > 10001){
+			id = parseInt(id_str) - 1;
+			id_str = ('000' + id).slice(-5);
+		}else{
+			if (id == 10001) {
+				id = 718;
+			}else{
+				id = parseInt(id_str) - 1;
+			}	
+			id_str = ('000' + id).slice(-3);
+		}
 		
 		if(id > 0){
 			resetaScreen();
@@ -256,8 +267,19 @@
 	};	
 	document.getElementsByClassName('bottom_button')[0].onclick = function(){
 		id_str = document.querySelector('.pokemon.selected').id;
-		id = parseInt(id_str) + 1;
-		id_str = ('000' + id).slice(-3);
+		id = parseInt(id_str);
+		if(id < 718){
+			id = parseInt(id_str) + 1;
+			id_str = ('000' + id).slice(-3);
+		}else{
+			if (id == 718) {
+				id = 10001;
+			}else{
+				id = parseInt(id_str) + 1;
+			}	
+			id_str = ('000' + id).slice(-5);
+		}
+
 		
 		if(id > 0){
 			resetaScreen();
@@ -308,7 +330,7 @@
 
 	// exibe a tela de ajuda ao clicar no botão de ajuda
 	clicou = false;
-	document.getElementsByClassName('poweroff')[0].onclick = function(){
+	document.getElementsByClassName('help')[0].onclick = function(){
 		clicou = !clicou;
 		if(clicou == true){
 			document.getElementsByClassName('right_button')[0].onclick = null;
@@ -326,13 +348,13 @@
 	}
 
 	// efeito de pressionado para o botão de ajuda
-	document.getElementsByClassName('poweroff')[0].onmousedown = function(){
+	document.getElementsByClassName('help')[0].onmousedown = function(){
 		this.classList.add("selected");
 	}
-	document.getElementsByClassName('poweroff')[0].onmouseup = function(){
+	document.getElementsByClassName('help')[0].onmouseup = function(){
 		this.classList.remove("selected")
 	}
-	document.getElementsByClassName('poweroff')[0].onmouseout = function(){
+	document.getElementsByClassName('help')[0].onmouseout = function(){
 		this.classList.remove("selected")
 	}
 
@@ -350,7 +372,7 @@
 		document.getElementsByClassName('types')[0].innerHTML = "";
 		document.getElementsByClassName('description')[0].innerHTML = "Descrition: <span></span>";
 
-		console.log(document.getElementsByClassName("selected").length);
+		/*console.log(document.getElementsByClassName("selected").length);*/
 		if(document.querySelectorAll(".pokemon.selected").length > 0)
 			document.querySelector(".pokemon.selected").classList.remove("selected");
 	}
@@ -442,6 +464,11 @@
 				// atualiza a descricao
 				if(infos.descriptions.length)
 					obtemDescricao(infos.descriptions[0].resource_uri);
+				else{
+					document.getElementsByClassName('description')[0].innerHTML = "Description:	<span>?????</span>"
+					falar("The information of this Pokémon are unknown.");
+				}
+
 			}
 		}
 		xmlHttp.open( "GET", 'http://pokeapi.co/api/v1/pokemon/' + identifier, true );
@@ -456,8 +483,7 @@
 				description = JSON.parse(xmlHttp.responseText);
 				document.getElementsByClassName('description')[0].innerHTML = "Description:	<span>" + description.description + "</span>";
 
-          		window.speechSynthesis.cancel();
-				utterance = new SpeechSynthesisUtterance();
+				/*utterance = new SpeechSynthesisUtterance();
 
 			  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ( infos.types[1] ? " and " + infos.types[1].name : "" )+ ' type. ' + description.description;
 			  	utterance.voice = 'Google US English';
@@ -474,13 +500,37 @@
 				audio.play();
 				setTimeout(function(){
 				  	window.speechSynthesis.speak(utterance);
-				}, 500);
+				}, 500);*/
+				falar(description.description);
 
 			}
 		}
 
 		xmlHttp.open( "GET", 'http://pokeapi.co/' + url, true );
 		xmlHttp.send( null );
+	}
+
+
+	function falar(description){
+  		window.speechSynthesis.cancel();
+		utterance = new SpeechSynthesisUtterance();
+
+	  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ( infos.types[1] ? " and " + infos.types[1].name : "" )+ ' type. ' + description;
+	  	utterance.voice = 'Google US English';
+	  	utterance.lang = 'en-US';
+	  	utterance.rate = 1;
+	  	utterance.pitch = 0.3;
+		utterance.onend = function(){
+			document.getElementsByClassName('blue_circle')[0].classList.remove('voice-animated');
+		};
+		utterance.onstart = function(){
+			document.getElementsByClassName('blue_circle')[0].classList.add('voice-animated');
+		};
+		audio = new Audio('sounds/ding.mp3');
+		audio.play();
+		setTimeout(function(){
+		  	window.speechSynthesis.speak(utterance);
+		}, 500);
 	}
 
 

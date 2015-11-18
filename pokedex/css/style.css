@@ -2133,7 +2133,7 @@
               border: 2px solid #000;
               border-radius: 20px;
               height: 99%; }
-              .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .poweroff {
+              .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .help {
                 width: 40px;
                 height: 40px;
                 float: left;
@@ -2142,9 +2142,9 @@
                 border-radius: 50%;
                 border: 1px solid #000;
                 text-align: center; }
-                .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .poweroff.selected {
+                .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .help.selected {
                   border: 2px solid #333; }
-                .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .poweroff i {
+                .pokedex .border-back-left .back-left .content-left .screen_block .screen_border_out .screen_border .help i {
                   margin-top: 5px;
                   font-size: 24px;
                   color: #fb0505;
