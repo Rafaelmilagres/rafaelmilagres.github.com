@@ -330,9 +330,11 @@
 
 	// exibe a tela de ajuda ao clicar no botão de ajuda
 	clicou = false;
+	posicao_antiga = "";
 	document.getElementsByClassName('help')[0].onclick = function(){
 		clicou = !clicou;
 		if(clicou == true){
+			posicao_antiga = document.getElementsByClassName('screens')[0].style.margin;
 			document.getElementsByClassName('right_button')[0].onclick = null;
 			document.getElementsByClassName('left_button')[0].onclick = null;
 			document.getElementsByClassName('screen_help')[0].style.left = "0";
@@ -342,7 +344,7 @@
 			document.getElementsByClassName('right_button')[0].onclick = right_button;
 			document.getElementsByClassName('left_button')[0].onclick = left_button;
 			document.getElementsByClassName('screen_help')[0].style.left = "-320px";
-			document.getElementsByClassName('screens')[0].style.margin = "0 0 0 0";
+			document.getElementsByClassName('screens')[0].style.margin = posicao_antiga;
 			document.getElementsByClassName('top')[0].style.margin = "0 0 0 0";
 		}
 	}
