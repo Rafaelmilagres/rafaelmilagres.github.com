@@ -71,7 +71,7 @@
 								<div class="screens">
 									<div class="screen1">
 										<div class="img">
-											<img src="imgs/pokebola.png">
+											<img id="pokeball" src="imgs/pokebola.png">
 										</div>
 										<div class="infos">
 											<span class="hp">HP: </span>
@@ -251,6 +251,7 @@
 			resetaScreen();
 			consultaPokemon(id_str);
 			document.getElementById(id_str).classList.add('selected');
+			document.getElementsByTagName('img')[0].classList.remove('hidden');
 		}
 	};	
 	document.getElementsByClassName('bottom_button')[0].onclick = function(){
@@ -262,6 +263,7 @@
 			resetaScreen();
 			consultaPokemon(id_str);
 			document.getElementById(id_str).classList.add('selected');
+			document.getElementsByTagName('img')[0].classList.remove('hidden');
 		}
 	};	
 
@@ -364,7 +366,6 @@
 				consultaPokemon(this.id);
 				document.getElementsByTagName('img')[0].classList.remove('hidden');
 
-
 				this.classList.add("selected");
 			}
 		}
@@ -420,24 +421,24 @@
 				img.addEventListener("load", function(){
 					document.getElementsByTagName('img')[0].classList.add('hidden');
 					document.getElementsByClassName('img')[0].appendChild(img);
+
+					// veriica se o pokemon é Macho ou Fêmea para insirir o icone respectivo
+					infos.name = infos.name.replace('-', ' ');
+					name = infos.name.replace('Nidoran m', 'Nidoran <i class=\"fa fa-mars\"></i></span>');
+					name = name.replace('Nidoran f', 'Nidoran <i class=\"fa fa-venus\"></i></span>');
+					document.getElementsByClassName('name')[0].innerHTML = name
+					document.getElementsByClassName('hp')[0].innerHTML = "HP: " + infos.hp;
+					document.getElementsByClassName('attack')[0].innerHTML = "Attack: " + infos.attack;
+					document.getElementsByClassName('defense')[0].innerHTML = "Defense: " + infos.defense;
+					document.getElementsByClassName('speed')[0].innerHTML = "Speed: " + infos.speed;
+
+					// types
+					for(t in infos.types){
+						re = new RegExp("{type}", 'g');
+						document.getElementsByClassName('types')[0].innerHTML += type_html.replace(re, infos.types[t].name);
+					}
+
 				}, false);
-
-				// veriica se o pokemon é Macho ou Fêmea para insirir o icone respectivo
-				infos.name = infos.name.replace('-', ' ');
-				name = infos.name.replace('Nidoran m', 'Nidoran <i class=\"fa fa-mars\"></i></span>');
-				name = name.replace('Nidoran f', 'Nidoran <i class=\"fa fa-venus\"></i></span>');
-				document.getElementsByClassName('name')[0].innerHTML = name
-				document.getElementsByClassName('hp')[0].innerHTML = "HP: " + infos.hp;
-				document.getElementsByClassName('attack')[0].innerHTML = "Attack: " + infos.attack;
-				document.getElementsByClassName('defense')[0].innerHTML = "Defense: " + infos.defense;
-				document.getElementsByClassName('speed')[0].innerHTML = "Speed: " + infos.speed;
-
-				// types
-				for(t in infos.types){
-					re = new RegExp("{type}", 'g');
-					document.getElementsByClassName('types')[0].innerHTML += type_html.replace(re, infos.types[t].name);
-				}
-
 				// atualiza a descricao
 				if(infos.descriptions.length)
 					obtemDescricao(infos.descriptions[0].resource_uri);
@@ -458,7 +459,7 @@
           		window.speechSynthesis.cancel();
 				utterance = new SpeechSynthesisUtterance();
 
-			  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ' type. ' + description.description;
+			  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ( infos.types[1] ? " and " + infos.types[1].name : "" )+ ' type. ' + description.description;
 			  	utterance.voice = 'Google US English';
 			  	utterance.lang = 'en-US';
 			  	utterance.rate = 1;

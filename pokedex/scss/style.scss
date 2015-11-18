@@ -55,7 +55,7 @@
 				border: 1px solid #000;
 
 				& .blue_circle{
-					background: #06fbfe;
+					background: darken(#06fbfe, 10%);
 					border-radius: 50%;
 					width: 70px;
 					position: relative;
@@ -333,6 +333,10 @@
 												margin: auto;
 												width: 130px;
 											}
+
+											& #pokeball{
+												animation: girar_pokebola 0.7s infinite;
+											}
 										}
 
 										& span{
@@ -384,7 +388,7 @@
 						width: 250px;
 						float: left;
 						font-size: 48px;
-						padding: 25px 0;
+						padding: 15px 0;
 						text-align: center;
 						cursor: default;
 
@@ -414,7 +418,9 @@
 							box-shadow: 0 0 2px #000;
 
 							&.clicked{
-								transform: rotateX(30deg);
+								left: 34px !important;
+								top: 0px;
+								transform: rotateX(10deg);
 							}
 						}
 
@@ -424,6 +430,12 @@
 							left: 0;
 							border-top-right-radius: 0;
 							border-bottom-left-radius: 5px;	
+
+							&.clicked{
+								left: 0px !important;
+								top: 33px;
+								transform: rotateY(-10deg);
+							}
 						}
 
 						& .center_button{
@@ -456,6 +468,12 @@
 							border-top-left-radius: 0;
 							border-bottom-right-radius: 5px;
 							border-bottom-left-radius: 5px;
+
+							&.clicked{
+								left: 35px !important;
+								top: 69px;
+								transform: rotateX(-5deg);
+							}
 						}
 
 						& .right_button{
@@ -464,6 +482,12 @@
 							left: 70px;
 							border-top-left-radius: 0;
 							border-bottom-right-radius: 5px;
+
+							&.clicked{
+								transform: rotateY(5deg);
+								top: 34px !important;
+								left: 69px !important;
+							}
 						}
 					}
 				}
@@ -714,42 +738,78 @@
 
 @-webkit-keyframes pisca{
 	0%{
-		background: lighten(#30fa04, 25%);
+		background: #06fbfe;
 	}
 	15%{
-		background: #06fbfe;
+		background: darken(#06fbfe, 10%);
 	}
 	60%{
-		background: lighten(#30fa04, 25%);
+		background: #06fbfe;
 	}
 	80%{
-		background: #06fbfe;
+		background: darken(#06fbfe, 10%);
 	}
 	90%{
-		background: lighten(#30fa04, 25%);
+		background: #06fbfe;
 	}
 	100%{
-		background: #06fbfe;
+		background: darken(#06fbfe, 10%);
 	}
 }
 
 @keyframes pisca{
 	0%{
-		background: lighten(#30fa04, 25%);
-	}
-	20%{
 		background: #06fbfe;
 	}
-	40%{
-		background: lighten(#30fa04, 25%);
+	15%{
+		background: darken(#06fbfe, 10%);
 	}
-	70%{
+	60%{
 		background: #06fbfe;
+	}
+	80%{
+		background: darken(#06fbfe, 10%);
 	}
 	90%{
-		background: lighten(#30fa04, 25%);
+		background: #06fbfe;
 	}
 	100%{
-		background: #06fbfe;
+		background: darken(#06fbfe, 10%);
+	}
+}
+
+@keyframes girar_pokebola{
+	0%{
+		transform: rotateZ(0);
+	}
+	15%{
+		transform: rotateZ(20deg);
+	}
+	30%{
+		transform: rotateZ(0);
+	}
+	45%{
+		transform: rotateZ(-20deg);
+	}
+	60%{
+		transform: rotateZ(0);	
+	}
+}
+
+@-webkit-keyframes girar_pokebola{
+	0%{
+		transform: rotateZ(0);
+	}
+	15%{
+		transform: rotateZ(20deg);
+	}
+	30%{
+		transform: rotateZ(0);
+	}
+	45%{
+		transform: rotateZ(-20deg);
+	}
+	60%{
+		transform: rotateZ(0);	
 	}
 }
