@@ -2457,12 +2457,12 @@
     border-left: none;
     border-top: none;
     position: relative;
-    transition: margin 0.7s ease-in-out; }
+    transition: margin,border 0.7s ease-in-out; }
     .pokedex .back-right svg {
       position: absolute;
       top: -102px;
-      left: 0;
-      width: 100.5%;
+      left: -1px;
+      width: 100.8%;
       height: 120%;
       transform: scaleX(-1);
       z-index: 10; }
@@ -2622,7 +2622,8 @@ button {
 .translateNormal {
   transform: translateY(0) !important; }
   .translateNormal .back-right {
-    margin-left: 1px !important; }
+    margin-left: 0px !important;
+    border-left: 2px solid #000; }
 
 .zindex {
   z-index: 35; }

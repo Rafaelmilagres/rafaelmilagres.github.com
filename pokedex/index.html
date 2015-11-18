@@ -216,8 +216,6 @@
 	</div>
 </div>
 
-<button id="vai">vai</button>
-
 <script type="text/javascript">
 	var pokemons;
 	var pokemon_html = "<div id=\"{id}\" class=\"pokemon\"><span class=\"id\">{id}</span><span class=\"nome\">{nome}</span></div>";
@@ -292,15 +290,6 @@
 			document.getElementsByTagName('img')[0].classList.remove('hidden');
 		}
 	};	
-
-
-	// ao iniciar a página, da o efeito de tela ligando e exibe os dados do pokemon de codigo 001
-	setTimeout(function(){
-		document.getElementsByClassName('shadow')[0].classList.remove('shadow');
-
-		// insere os dados do primeiro pokemon
-		consultaPokemon("001");
-	},3000);
 
 
 
@@ -521,7 +510,7 @@
   		window.speechSynthesis.cancel();
 		utterance = new SpeechSynthesisUtterance();
 
-	  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', one pokémon ' + infos.types[0].name + ( infos.types[1] ? " and " + infos.types[1].name : "" )+ ' type. ' + description;
+	  	utterance.text = (infos.name == 'Nidoran f' ? 'Nidoran Female' : (infos.name == 'Nidoran m' ? 'Nidoram Male' : infos.name)) + ', a' + (['a','e','i','o','u'].indexOf(infos.types[0].name[0]) != -1 ? 'n ' : ' ') + infos.types[0].name + ( infos.types[1] ? " and a" + (['a','e','i','o','u'].indexOf(infos.types[1].name[0]) != -1 ? 'n ' : ' ') + infos.types[1].name : "" )+ ' pokemon. ' + description;
 	  	utterance.voice = 'Google US English';
 	  	utterance.lang = 'en-US';
 	  	utterance.rate = 1;
@@ -579,7 +568,9 @@
 
 
 	
-document.getElementById('vai').onclick = function(){
+document.querySelector('.back-right svg').onclick = function(){
+
+  	window.speechSynthesis.cancel();
 	document.getElementsByClassName('back-right-block')[0].classList.toggle("translateNormal");
 	setTimeout(function(){
 		document.getElementsByClassName('back-right-back')[0].classList.toggle('zindex');
@@ -590,6 +581,14 @@ document.getElementById('vai').onclick = function(){
 			lista[l].classList.toggle('hide');
 		}
 	}, 500);
+
+	// ao iniciar a página, da o efeito de tela ligando e exibe os dados do pokemon de codigo 001
+	setTimeout(function(){
+		document.getElementsByClassName('shadow')[0].classList.remove('shadow');
+
+		// insere os dados do primeiro pokemon
+		consultaPokemon("001");
+	},3000);
 }
 
 </script>
